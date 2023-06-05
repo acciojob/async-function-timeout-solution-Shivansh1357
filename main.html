@@ -1,20 +1,36 @@
 <!DOCTYPE html>
-
 <html>
-  <head>
-    <link rel="stylesheet" href="styles.css" />
-  </head>
+<head>
+  <title>Async Function with Timeout</title>
+  <script>
+    async function displayMessage() {
+      const textInput = document.getElementById("text");
+      const delayInput = document.getElementById("delay");
+      const outputDiv = document.getElementById("output");
 
-  <body>
-    <!-- the entire body must be written by student -->
-    <form onsubmit="return false">
-      <input type="text" id="text" placeholder="Text" />
-      <input type="number" id="delay" placeholder="Delay" />
-      <button type="button" id="btn">Submit</button>
-    </form>
+      const text = textInput.value;
+      const delay = parseInt(delayInput.value);
 
-    <div id="output"></div>
+      outputDiv.textContent = "Waiting...";
+      
+      await new Promise((resolve) => setTimeout(resolve, delay));
+      
+      outputDiv.textContent = text;
+    }
 
-    <script type="text/javascript" src="./script.js"></script>
-  </body>
+    const btn = document.getElementById("btn");
+    btn.addEventListener("click", displayMessage);
+  </script>
+</head>
+<body>
+  <label for="text">Enter text:</label>
+  <input type="text" id="text">
+  <br>
+  <label for="delay">Enter delay in milliseconds:</label>
+  <input type="number" id="delay">
+  <br>
+  <button id="btn">Display Message</button>
+  <br>
+  <div id="output"></div>
+</body>
 </html>
